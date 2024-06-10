@@ -14,25 +14,30 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  hash      String
-  email     String    @unique
-  firstname String?
-  lastname  String?
-  Address   Address[]
+  id          Int           @id @default(autoincrement())
+  hash        String
+  email       String        @unique
+  firstname   String?
+  lastname    String?
+  Address     Address[]
+  Transaction Transaction[]
 }
 
 model Address {
-  id      Int  @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   userId  Int
-  address User @relation(fields: [userId], references: [id])
+  address String
+  user    User   @relation(fields: [userId], references: [id])
 }
 
 model Transaction {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  trxHash   String
-  createAt  DateTime @default(now())
-  doneAt    DateTime
-  ifSuccess Boolean
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  trxHash     String
+  fromAddress String
+  toAddress   String
+  createAt    DateTime @default(now())
+  doneAt      DateTime
+  ifSuccess   Boolean
+  transaction User     @relation(fields: [userId], references: [id])
 }
