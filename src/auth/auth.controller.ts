@@ -10,11 +10,12 @@ export class AuthController {
     constructor(private authService: AuthService) { }
     @Post('signup')
     signup() {
-        return 'This action adds a new user';  
+        return this.authService.signup();
+        // return {msg:'add a new user'};  
     }
     @Post('signin')
     signin() {
-        
+        return this.authService.signin();
     }
 
 }
