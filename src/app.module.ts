@@ -3,9 +3,10 @@ import { TrxModule } from './trx/trx.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TrxModule, UserModule, AuthModule, PrismaModule],
+  imports: [ConfigModule.forRoot({isGlobal:true}), TrxModule, UserModule, AuthModule, PrismaModule],
   controllers: [],
   providers: [],
 })

@@ -7,9 +7,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "prisma:dev:db:dev": "npx prisma migrate dev",
+    "prisma:dev:db:deploy": "npx prisma migrate deploy",
     "db:dev:rm": "docker compose rm dev-db -s -f -v",
-    "db:dev:up": "docker compose up dev-db",
-    "db:dev:restart": "npm run db:dev:rm && npm run db:dev:up",
+    "db:dev:up": "docker compose up dev-db -d",
+    "db:dev:restart": "npm run db:dev:rm && npm run db:dev:up && npm run prisma:dev:db:deploy",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -25,6 +26,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.2.2",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "@prisma/client": "^5.15.0",
