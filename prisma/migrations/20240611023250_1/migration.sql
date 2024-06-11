@@ -13,6 +13,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Address" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
+    "address" TEXT NOT NULL,
 
     CONSTRAINT "Address_pkey" PRIMARY KEY ("id")
 );
@@ -22,6 +23,8 @@ CREATE TABLE "Transaction" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "trxHash" TEXT NOT NULL,
+    "fromAddress" TEXT NOT NULL,
+    "toAddress" TEXT NOT NULL,
     "createAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "doneAt" TIMESTAMP(3) NOT NULL,
     "ifSuccess" BOOLEAN NOT NULL,
@@ -34,3 +37,6 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- AddForeignKey
 ALTER TABLE "Address" ADD CONSTRAINT "Address_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Transaction" ADD CONSTRAINT "Transaction_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
